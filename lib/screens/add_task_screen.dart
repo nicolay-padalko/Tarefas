@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tarefas/models/task_data.dart';
+import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {
-
-  final Function addTaskCallback;
-
-  AddTaskScreen(this.addTaskCallback);
-
   @override
   Widget build(BuildContext context) {
 
@@ -43,17 +40,18 @@ class AddTaskScreen extends StatelessWidget {
               },
             ),
             FlatButton(
-              color: Colors.blue,
-              textColor: Colors.white,
-              onPressed: (){
-                addTaskCallback(newTaskTitle);
-              },
               child: Text(
                 'ADICIONA',
                 style: TextStyle(
                   fontSize: 15.0,
                 ),
               ),
+              color: Colors.blue,
+              textColor: Colors.white,
+              onPressed: (){
+                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
